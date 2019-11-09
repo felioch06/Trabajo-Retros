@@ -17,6 +17,8 @@ class Usuario extends DB{
          die($e->getMessage());
       }
   }
+
+
   public function request(){
     try{
       $q=parent::connect()->prepare("SELECT * FROM usuarios LIMIT 20");
@@ -26,9 +28,9 @@ class Usuario extends DB{
        die($e->getMessage());
     }
 }
-  public function update($Nombres,$Apellidos,$Correo,$Direccion,$Telefono,$foto_perfil,$created_at,$updated_at){
+  public function update($Nombres,$Apellidos,$Correo,$Direccion,$Telefono,$foto_perfil,$updated_at,$UsuarioID){
     try{
-      $q=parent::connect()->prepare("UPDATE usuario SET nombres= ? , apellidos = ?, correo =  ? , direccion= ?, telefono =  ?, foto_perfil= ? , updated_at = ? WHERE id = ?");
+      $q=parent::connect()->prepare("UPDATE usuarios SET nombres= ? , apellidos = ?, correo =  ? , direccion= ?, telefono =  ?, foto_perfil= ? , updated_at = ? WHERE id = ?");
         $q->bindParam(1,$Nombres,PDO::PARAM_STR);
         $q->bindParam(2,$Apellidos, PDO::PARAM_STR);
         $q->bindParam(3,$Correo,PDO::PARAM_STR);

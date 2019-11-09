@@ -112,26 +112,44 @@
 
       parent::destroy($id);
 
+      unlink('assets/img/aaa.png');
       header('location:?c=usuarios&m=index');
     }
 
     public function edit(){
-      echo $nombres = $_POST['nombres'];
-      echo $id = $_POST['inputE'];
+      $id = $_POST['id'];
+      $nombres = $_POST['nombres'];
+      $apellidos = $_POST['apellidos'];
+      $correo = $_POST['correo'];
+      $direccion = $_POST['direccion'];
+      $telefono = $_POST['telefono'];
+
+      date_default_timezone_set('America/Bogota');
+      $updated_at = date('Y-m-d H:i:s');
+      
+      $route = "assets/img";
+      $name_file = $_FILES['foto_perfil']['name'];
+      $tpm_name = $_FILES['foto_perfil']['tmp_name'];
+      $foto_perfil = 'assets/img/'.$name_file;
+      move_uploaded_file($tpm_name,'assets/img/'. $name_file);
+
+      parent::update($nombres,$apellidos,$correo,$direccion,$telefono,$foto_perfil,$updated_at,$id);
+      header("location:?c=Usuarios&m=index");
+
     }
 
     public function felipeC(){
       $consultaPorId = parent::searchForId($_POST['id']);
 ?>
-      <form action="?c=Usuarios&m=Edit" method="post">
+      <form action="?c=Usuarios&m=Edit" method="post" enctype="multipart/form-data">
          
-        <input type="text" name="id" value="<?php echo $consultaPorId->id ?>" class="form-control my-3">
-        <input type="text" name="nombres" value="<?php echo $consultaPorId->nombres ?>" class="form-control my-3">
-        <input type="text" name="apellidos" value="<?php echo $consultaPorId->apellidos ?>" class="form-control my-3">
-        <input type="text" name="correo" value="<?php echo $consultaPorId->correo ?>" class="form-control my-3">
-        <input type="text" name="direccion" value="<?php echo $consultaPorId->direccion ?>" class="form-control my-3">
-        <input type="text" name="telefono" value="<?php echo $consultaPorId->telefono ?>" class="form-control my-3">
-        <input type="text" name="foto_perfil" value="<?php echo $consultaPorId->foto_perfil ?>" class="form-control my-3">
+        <input type="hidden" name="id" value="<?php echo $consultaPorId->id ?>" class="form-control my-3" required>
+        <input type="text" name="nombres" value="<?php echo $consultaPorId->nombres ?>" class="form-control my-3" required>
+        <input type="text" name="apellidos" value="<?php echo $consultaPorId->apellidos ?>" class="form-control my-3" required>
+        <input type="email" name="correo" value="<?php echo $consultaPorId->correo ?>" class="form-control my-3" required>
+        <input type="text" name="direccion" value="<?php echo $consultaPorId->direccion ?>" class="form-control my-3" required>
+        <input type="text" name="telefono" value="<?php echo $consultaPorId->telefono ?>" class="form-control my-3" required>
+        <input type="file" name="foto_perfil" value="<?php echo $consultaPorId->foto_perfil ?>" class=" my-3" required>
 
       </div>
 

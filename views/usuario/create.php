@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Telefono</label>
-                        <input type="text" class="form-control" name="telefono" placeholder="Telefono" required>
+                        <input type="number" class="form-control" name="telefono" placeholder="Telefono" required>
                     </div>
 
                     <div class="form-group">

@@ -9,9 +9,6 @@
    <title>Proyecto |</title>
 </head>
 <body>
-<div style="background-color: black; font-size: 100px">
-<center ><h1 style="color: white">CHUPAME LA VERGA XD XD XD </h1></center>
-</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div  class="container">
   <a class="navbar-brand" href="#">PROYECTO</a>
