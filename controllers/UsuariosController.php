@@ -110,10 +110,17 @@
     public function destroyed(){
       $id = $_REQUEST['id'];
 
-      parent::destroy($id);
+      $consulta = parent::searchForId($id);
 
-      unlink('assets/img/aaa.png');
-      header('location:?c=usuarios&m=index');
+      if($consulta->foto_perfil == "assets/img/img_profile_default.jpg"){
+        parent::destroy($id);
+        header('location:?c=usuarios&m=index');
+      }else{
+        parent::destroy($id);
+        unlink($consulta->foto_perfil);
+        header('location:?c=usuarios&m=index');
+      }
+      
     }
 
     public function edit(){
