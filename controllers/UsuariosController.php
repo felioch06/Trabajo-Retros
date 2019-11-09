@@ -140,8 +140,15 @@
       $foto_perfil = 'assets/img/'.$name_file;
       move_uploaded_file($tpm_name,'assets/img/'. $name_file);
 
-      parent::update($nombres,$apellidos,$correo,$direccion,$telefono,$foto_perfil,$updated_at,$id);
-      header("location:?c=Usuarios&m=index");
+      if($name_file == ""){
+        echo $foto_perfil_actual = parent::searchForId($id)->foto_perfil;
+        parent::update($nombres,$apellidos,$correo,$direccion,$telefono,$foto_perfil_actual,$updated_at,$id);
+        header("location:?c=Usuarios&m=index");
+      }else{
+        parent::update($nombres,$apellidos,$correo,$direccion,$telefono,$foto_perfil,$updated_at,$id);
+        header("location:?c=Usuarios&m=index");
+      }
+      
 
     }
 
@@ -156,7 +163,7 @@
         <input type="email" name="correo" value="<?php echo $consultaPorId->correo ?>" class="form-control my-3" required>
         <input type="text" name="direccion" value="<?php echo $consultaPorId->direccion ?>" class="form-control my-3" required>
         <input type="text" name="telefono" value="<?php echo $consultaPorId->telefono ?>" class="form-control my-3" required>
-        <input type="file" name="foto_perfil" value="<?php echo $consultaPorId->foto_perfil ?>" class=" my-3" required>
+        <input type="file" name="foto_perfil" value="<?php echo $consultaPorId->foto_perfil ?>" class=" my-3">
 
       </div>
 
