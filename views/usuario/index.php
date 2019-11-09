@@ -1,3 +1,4 @@
+
 <div class="container">
 <br>
 <nav aria-label="breadcrumb">
@@ -15,6 +16,7 @@
       <th colspan="7" class="text-center bg-info text-white"><?php echo count(parent::request()); ?> Usuario registrados</th>
    </tr>
        <tr class="bg-secondary text-white">
+           <th>IMG</th>
            <th>NOMBRES</th>
            <th>APELLIDOS</th>
            <th>CORREO</th>
@@ -29,6 +31,7 @@ foreach(parent::request() as $request){
 ?>
        <tr>
            <td><?php echo $request->nombres ?></td>
+           <td><?php echo $request->nombres ?></td>
            <td><?php echo $request->apellidos ?></td>
            <td><?php echo $request->correo ?></td>
            <td><?php echo $request->direccion ?></td>
@@ -36,8 +39,8 @@ foreach(parent::request() as $request){
            <td>
            <div class="btn-group" role="group" aria-label="Basic example">
 
-           <a href="" class="btn btn-warning btn-sm">Editar</a>
-           <a href="" id="alumno_<?php $id = $request->id; echo $id?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Emininar</a>
+           <button href="" data-id="<?php echo $request->id ?>" class="btn btn-warning btn-sm felipe" >Editar</button>
+           <a href="" id="alumno_<?php  echo $id?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Emininar</a>
            
            <script>
             var id_alumno = document.getElementById('alumno_<?php print($id);?>');
@@ -46,6 +49,14 @@ foreach(parent::request() as $request){
 
               document.getElementById('texto').innerHTML = "Deseas Eliminar El Usuario <?php print($request->nombres) ?>";
               document.getElementById('input').value = "<?php print($id) ?>";
+            })
+
+            var id_alumnoE = document.getElementById('EditarAlumno_<?php print($id);?>');
+
+            id_alumnoE.addEventListener('click', function(){
+
+              document.getElementById('textoE').innerHTML = "Deseas Actualizar El Usuario <?php print($request->nombres) ?>";
+              document.getElementById('id_input').value = "<?php print($id) ?>";
             })
           </script> 
 
@@ -86,6 +97,29 @@ foreach(parent::request() as $request){
             })
         </script>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+     <div id="response_result">
+
+     </div>
+
+        <!-- fin de formulario -->
       </div>
     </div>
   </div>

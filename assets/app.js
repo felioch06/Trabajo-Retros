@@ -15,3 +15,18 @@ $('#input_search').keyup(function(){
         }
     });
 });
+
+
+$('.felipe').click(function(){
+   var data = $(this).attr('data-id');
+   $.ajax({
+      type: 'post',
+      url : '?c=usuarios&m=felipeC',
+      data :{id:data},
+      success(response){
+        $('#response_result').html(response);
+        $('#exampleModalE').modal('show');
+      }
+   });
+ 
+});

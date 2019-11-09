@@ -3,7 +3,7 @@ class Usuario extends DB{
     
   public function store($Nombres,$Apellidos,$Correo,$Direccion,$Telefono,$foto_perfil,$created_at,$updated_at){
       try{
-        $q=parent::connect()->prepare("INSERT INTO usuarios (nombres,apellidos,correo,direccion,telefono,foto_perfil,created_at,updated_at)VALUES(?,?,?,?)");
+        $q=parent::connect()->prepare("INSERT INTO usuarios (nombres,apellidos,correo,direccion,telefono,foto_perfil,created_at,updated_at)VALUES(?,?,?,?,?,?,?,?)");
         $q->bindParam(1,$Nombres,PDO::PARAM_STR);
         $q->bindParam(2,$Apellidos, PDO::PARAM_STR);
         $q->bindParam(3,$Correo,PDO::PARAM_STR);
@@ -19,7 +19,7 @@ class Usuario extends DB{
   }
   public function request(){
     try{
-      $q=parent::connect()->prepare("SELECT * FROM usuarios");
+      $q=parent::connect()->prepare("SELECT * FROM usuarios LIMIT 20");
       $q->execute();
       return $q->fetchAll(PDO::FETCH_OBJ);
     }catch(Exception $e){
@@ -51,6 +51,17 @@ class Usuario extends DB{
     }catch(Exception $e){
        die($e->getMessage());
     }
+}
+
+public function searchForId($id){
+  try{
+    $q=parent::connect()->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $q->bindParam(1,$id,PDO::PARAM_INT);
+    $q->execute();
+    return $q->fetch(PDO::FETCH_OBJ);
+  }catch(Exception $e){
+     die($e->getMessage());
+  }
 }
 public function destroy($UsuarioID){
   try{
